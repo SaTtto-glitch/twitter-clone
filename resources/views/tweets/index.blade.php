@@ -40,19 +40,6 @@
                                     <button type="submit" class="btn btn-primary">Favorite</button>
                                 </form>
                             @endif
-    
-                            @if (auth()->user()->isFollowing($tweet->user))
-                                <form action="{{ route('follow.destroy', $tweet->user->id) }}" method="POST" class="mt-2">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Unfollow</button>
-                                </form>
-                            @else
-                                <form action="{{ route('follow.store', $tweet->user->id) }}" method="POST" class="mt-2">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary">Follow</button>
-                                </form>
-                            @endif
                         </div>
                     </div>
                 @endforeach
