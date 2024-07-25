@@ -27,4 +27,9 @@ class User extends Authenticatable
     {
         return $this->follows()->where('follower_id', $user->id)->exists();
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 }

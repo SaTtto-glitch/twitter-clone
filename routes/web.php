@@ -4,6 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TweetController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\UserController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,6 +27,13 @@ Route::post('/tweets', [TweetController::class, 'store'])->name('tweets.store');
 
 Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
 Route::delete('/follow/{user}', [FollowController::class, 'destroy'])->name('follow.destroy');
+
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+
+Route::post('/favorite/{tweetId}', [FavoriteController::class, 'store'])->name('favorite.store');
+Route::delete('/favorite/{tweetId}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
+
+
 
 require __DIR__.'/auth.php';
 
