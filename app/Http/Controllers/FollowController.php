@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Follow;
-use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store(User $user)
     {
-        $request->user()->follows()->create([
-            'follower_id' => $id,
-        ]);
+        Auth::user()->follows()->attach($user->id);
 
-        return back();
+        return redirect()->back();
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy(User $user)
     {
-        $request->user()->follows()->where('follower_id', $id)->delete();
+        Auth::user()->follows()->detach($user->id);
 
-        return back();
+        return redirect()->back();
     }
 }
+
+
+
+
 

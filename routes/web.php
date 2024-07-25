@@ -19,14 +19,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 Route::get('/tweets', [TweetController::class, 'index'])->name('tweets.index');
 Route::post('/tweets', [TweetController::class, 'store'])->name('tweets.store');
 
-
-
-// Route::post('/follow/{id}', [FollowController::class, 'store'])->name('follow.store');
-// Route::delete('/unfollow/{id}', [FollowController::class, 'destroy'])->name('follow.destroy');
-
+Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
+Route::delete('/follow/{user}', [FollowController::class, 'destroy'])->name('follow.destroy');
 
 require __DIR__.'/auth.php';
+
