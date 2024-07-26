@@ -30,7 +30,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/favorite/{tweetId}', [FavoriteController::class, 'store'])->name('favorite.store');
     Route::delete('/favorite/{tweetId}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
+
+    
 });
+
 
 require __DIR__.'/auth.php';
 
