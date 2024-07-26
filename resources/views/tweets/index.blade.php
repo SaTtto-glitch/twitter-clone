@@ -23,7 +23,14 @@
                     <div class="card mt-2 shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">
-                              <a href="{{ route('users.show', $tweet->user->id) }}">{{ $tweet->user->name }}</a>
+                              <a href="{{ route('users.show', $tweet->user->id) }}">
+                                {{ $tweet->user->name }}
+                                @if ($tweet->user->profile_image)
+                                    <img src="{{ asset('images/' . $tweet->user->profile_image) }}" alt="プロフィール画像" width="50" height="50" class="rounded-circle">
+                                @else
+                                    <img src="{{ asset('default_profile_image.png') }}" alt="デフォルトプロフィール画像" width="50" height="50" class="rounded-circle">
+                                @endif
+                              </a>
                             </h5>
                             <p class="card-text">{{ $tweet->body }}</p>
                             <small class="text-muted">{{ $tweet->created_at->diffForHumans() }}</small>
