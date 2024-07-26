@@ -45,6 +45,17 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
+        ],
+        "pre-install-cmd": [
+          "curl -sS https://getcomposer.org/installer | php",
+          "php composer.phar install",
+          "npm install",
+          "npm run build"
+        ],
+        "post-install-cmd": [
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php -r \"chmod('database/database.sqlite', 0777);\"",
+            "php artisan migrate --force"
         ]
     },
     "extra": {
