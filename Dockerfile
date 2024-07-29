@@ -14,6 +14,10 @@ ENV APP_ENV production
 ENV APP_DEBUG false
 ENV LOG_CHANNEL stderr
 
+# Set permissions for database file
+RUN chown www-data:www-data /var/www/html/database/database.sqlite
+RUN chmod 664 /var/www/html/database/database.sqlite
+
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
