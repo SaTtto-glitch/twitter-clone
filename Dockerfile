@@ -32,7 +32,13 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www/html
 
 # Copy existing application directory permissions
-COPY --chown=www-data:www-data . /var/www/html
+RUN chown -R www-data:www-data /var/www/html
+
+# Install PHP dependencies
+RUN composer install
+
+# Install Node.js dependencies
+RUN npm install && npm run build
 
 # Change current user to www
 USER www-data
