@@ -1,45 +1,26 @@
-# Use an official PHP runtime as a parent image
-FROM php:8.1-fpm
+FROM node:16-slim as node-builder
 
-# Install dependencies
+COPY . ./app
+RUN cd /app && npm ci && npm run prod
+
+
+FROM php:8.1.5-apache
+
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    locales \
-    zip \
-    jpegoptim optipng pngquant gifsicle \
-    vim \
-    unzip \
-    git \
-    curl \
-    npm
+  zip \
+  unzip \
+  git
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN docker-php-ext-install -j "$(nproc)" opcache && docker-php-ext-enable opcache
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+RUN sed -i 's#/var/www/html#/var/www/html/public#g' /etc/apache2/sites-available/000-default.conf
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
 
-# Copy existing application directory contents
-COPY . /var/www/html
-
-# Copy existing application directory permissions
-RUN chown -R www-data:www-data /var/www/html
-
-# Install PHP dependencies
+WORKDIR /var/www/html
+COPY . ./
+COPY --from=node-builder /app/public ./public
 RUN composer install
-
-# Install Node.js dependencies
-RUN npm install && npm run build
-
-# Change current user to www
-USER www-data
-
-# Expose port 9000 and start php-fpm server
-EXPOSE 9000
-CMD ["php-fpm"]
+RUN chown -Rf www-data:www-data ./
