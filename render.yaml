@@ -5,7 +5,7 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     buildCommand: "composer install && npm install && npm run build"
-    startCommand: "/start.sh"
+    startCommand: ""
     envVars:
       - key: APP_ENV
         value: production
