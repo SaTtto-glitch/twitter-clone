@@ -5,7 +5,7 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     buildCommand: "composer install && npm install && npm run build"
-    startCommand: "php-fpm"
+    startCommand: "/start.sh"
     envVars:
       - key: APP_ENV
         value: production
