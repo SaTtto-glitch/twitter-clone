@@ -19,11 +19,7 @@ RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 775 /var/www/html/storage
 RUN chmod -R 775 /var/www/html/database
 
-# Create directory for PHP-FPM socket
-RUN mkdir -p /var/run/php
+# Allow composer to run as root
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
-# Add the start script
-COPY start.sh /usr/local/bin/start.sh
-RUN chmod +x /usr/local/bin/start.sh
-
-CMD ["sh", "-c", "/usr/local/bin/start.sh"]
+CMD ["/start.sh"]
