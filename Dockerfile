@@ -17,4 +17,9 @@ ENV LOG_CHANNEL stderr
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+# Add and run the check script
+COPY check_db.sh /usr/local/bin/check_db.sh
+RUN chmod +x /usr/local/bin/check_db.sh
+RUN /usr/local/bin/check_db.sh
+
 CMD ["/start.sh"]

@@ -34,13 +34,5 @@ Route::middleware('auth')->group(function () {
     
 });
 
-Route::get('/check-database', function () {
-    $dbPath = '/var/www/html/database/database.sqlite';
-    $exists = file_exists($dbPath) ? 'exists' : 'does not exist';
-    $permissions = substr(sprintf('%o', fileperms($dbPath)), -4);
-    $isWritable = is_writable($dbPath) ? 'writable' : 'not writable';
-    return "Database path: $dbPath - Exists: $exists - Permissions: $permissions - Writable: $isWritable";
-});
-
 require __DIR__.'/auth.php';
 
