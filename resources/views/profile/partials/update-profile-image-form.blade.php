@@ -9,7 +9,7 @@
         <input type="file" name="profile_image" id="profile_image" class="mt-1 block w-full">
         @if (auth()->user()->profile_image)
             <div class="mt-2">
-                <img src="{{ asset('images/' . auth()->user()->profile_image) }}" alt="プロフィール画像" class="w-24 h-24 rounded-full">
+                <img src="{{ asset('/images' . auth()->user()->profile_image) }}" alt="プロフィール画像" class="w-24 h-24 rounded-full">
             </div>
         @endif
         @error('profile_image')
