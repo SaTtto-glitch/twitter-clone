@@ -26,4 +26,4 @@ RUN chmod 775 /var/www/html/database
 COPY start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
 
-CMD ["/usr/local/bin/start.sh"]
+CMD ["sh", "-c", "/usr/local/bin/start.sh"]
