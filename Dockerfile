@@ -14,11 +14,6 @@ ENV APP_ENV production
 ENV APP_DEBUG false
 ENV LOG_CHANNEL stderr
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 775 /var/www/html/storage
-RUN chmod -R 775 /var/www/html/database
-
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
