@@ -8,16 +8,25 @@
   ],
   "license": "MIT",
   "require": {
-      "php": "^8.0",
+      "php": "^8.2",
       "laravel/framework": "^11.0",
-      "laravel/tinker": "^2.9"
+      "laravel/tinker": "^2.9",
+      "symfony/http-kernel": "^7.0",
+      "symfony/deprecation-contracts": "^2.5|^3",
+      "psr/log": "^1|^2|^3",
+      "symfony/var-dumper": "^6.4|^7.0"
   },
   "require-dev": {
       "filp/whoops": "^2.15",
       "fakerphp/faker": "^1.23",
       "mockery/mockery": "^1.6",
       "nunomaduro/collision": "^8.1",
-      "phpunit/phpunit": "^11.0"
+      "phpunit/phpunit": "^11.0",
+      "symfony/serializer": "^6.4|^7.0"
+  },
+  "conflict": {
+      "symfony/deprecation-contracts": "<2.5",
+      "symfony/http-kernel": "<6.4"
   },
   "config": {
       "optimize-autoloader": true,
@@ -34,7 +43,7 @@
           "App\\": "app/"
       },
       "classmap": [
-          "database/seeders",
+          "database/seeds",
           "database/factories"
       ]
   },
