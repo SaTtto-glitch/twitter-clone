@@ -20,7 +20,7 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 775 /var/www/html/storage
-RUN chmod 775 /var/www/html/database/database.sqlite
+RUN chmod 775 /var/www/html/database
 
 # Add the start script
 COPY start.sh /usr/local/bin/start.sh
