@@ -4,6 +4,8 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            @if ($isLoggedIn)
             <div class="card shadow-sm">
                 <div class="card-body">
                   <form action="{{ route('tweets.store') }}" method="POST">
@@ -26,6 +28,7 @@
                   </form>
                 </div>
             </div>
+            @endif
 
             <div class="mt-4">
                 @foreach ($tweets as $tweet)
@@ -45,6 +48,7 @@
                             <p class="card-text">{{ $tweet->body }}</p>
 
                             <div class="mt-2">
+                            @if ($isLoggedIn)
                                 @if ($tweet->isFavoritedBy(auth()->user()))
                                   <form action="{{ route('favorite.destroy', $tweet->id) }}" method="POST" style="display:inline;">
                                       @csrf
@@ -61,11 +65,19 @@
                                       </button>
                                   </form>
                                 @endif
+                              @endif
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+
+          <!-- ログインしていない場合、つぶやき投稿を促すメッセージを表示 -->
+          @if (!$isLoggedIn)
+            <div class="text-center mt-4">
+                <p>ログインしてつぶやきを投稿しよう！ <a href="{{ route('login') }}">ログイン</a></p>
+            </div>
+          @endif
         </div>
     </div>
 </div>

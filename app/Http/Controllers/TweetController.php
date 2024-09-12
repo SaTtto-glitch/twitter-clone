@@ -10,9 +10,12 @@ class TweetController extends Controller
     public function index()
     {
         $tweets = Tweet::with('user')->latest()->get();
-        return view('tweets.index', compact('tweets'));
-    }
 
+        // ユーザーがログインしているかどうかでフラグを渡す
+        $isLoggedIn = auth()->check();
+
+        return view('tweets.index', compact('tweets', 'isLoggedIn'));
+    }
     public function store(Request $request)
     {
         $request->validate([
