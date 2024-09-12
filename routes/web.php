@@ -14,6 +14,7 @@ Route::get('/', function () {
 })->middleware(RedirectIfAuthenticated::class); 
 */
 
+Route::redirect('/', '/home');
 Route::get('/home', [TweetController::class, 'index'])->name('tweets.index');
 
 Route::middleware('auth')->group(function () {
