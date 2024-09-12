@@ -39,7 +39,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Lログアウト') }}
+                                {{ __('ログアウト') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
