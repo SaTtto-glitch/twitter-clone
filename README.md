@@ -17,6 +17,8 @@ $ sudo systemctl enable nginx
 ステータスを確認
 $ sudo systemctl status nginx
 
+ /var/www/twitter-clone
+ 
 httpでアクセスする
 
 デプロイ
