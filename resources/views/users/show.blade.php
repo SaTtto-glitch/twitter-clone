@@ -16,20 +16,22 @@
                     <div class="flex-grow-1">
                         <h3 class="card-title mb-0">{{ $user->name }}</h3>
                     </div>
-                    <div>
-                        @if (auth()->user()->isFollowing($user))
-                            <form action="{{ route('follow.destroy', $user->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Unfollow</button>
-                            </form>
-                        @else
-                            <form action="{{ route('follow.store', $user->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">Follow</button>
-                            </form>
-                        @endif
-                    </div>
+                    @if (auth()->user()->id !== $user->id)
+                        <div>
+                            @if (auth()->user()->isFollowing($user))
+                                <form action="{{ route('follow.destroy', $user->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Unfollow</button>
+                                </form>
+                            @else
+                                <form action="{{ route('follow.store', $user->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary">Follow</button>
+                                </form>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
 
